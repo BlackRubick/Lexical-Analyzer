@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analizador xD</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="h1">Bienvenido al mejor analizador xD </h1>
+    <div class="input-container">
+      <textarea id="codeInput" placeholder="Ponelo vos tu codigo aqui hija ..."></textarea>
+      <button onclick="runLexer()">Verificalo vos pue chito</button>
+    </div>
+    <table id="outputTable"></table>
+  </div>
+
+  <script src="./main.js"></script>
+  <script>
+    function runLexer() {
+      const codeInput = document.getElementById('codeInput').value;
+      const lexer = new Lexer(codeInput);
+      let token;
+      const outputTable = document.getElementById('outputTable');
+      outputTable.innerHTML = ''; 
+
+      while (token = lexer.nextToken()) {
+        displayToken(token);
+      }
+    }
+
+    function displayToken(token) {
+      const outputTable = document.getElementById('outputTable');
+      const row = outputTable.insertRow();
+      const typeCell = row.insertCell(0);
+      const valueCell = row.insertCell(1);
+
+      typeCell.textContent = token.type;
+      valueCell.textContent = token.value;
+    }
+  </script>
+</body>
+</html>
+
+
